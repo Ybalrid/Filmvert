@@ -14,9 +14,16 @@ set (CMAKE_OSX_DEPLOYMENT_TARGET "13.0")
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+#LibRaw has a strange stance about how they distribute CMake build scripts in a separate repository
+unset(LIBRAW_PATH CACHE)
+set(LIBRAW_PATH "${CMAKE_SOURCE_DIR}/deps/LibRaw/" CACHE STRING "Path to included LibRaw submodule" FORCE)
+add_subdirectory(${CMAKE_SOURCE_DIR}/deps/LibRaw-cmake)
 
-find_package(libraw REQUIRED)
-find_package(OpenImageIO REQUIRED)
+add_subdirectory(${CMAKE_SOURCE_DIR}/deps/zlib)
+add_subdirectory(${CMAKE_SOURCE_DIR}/deps/Imath)
+set(OpenImageIO_BUILD_MISSING_DEPS all CACHE STRING "OpenImageIO can build things by itself, use that." FORCE)
+add_subdirectory(${CMAKE_SOURCE_DIR}/deps/OpenImageIO)
+
 find_package(OpenColorIO REQUIRED)
 find_package(exiv2 REQUIRED)
 find_package(fmt REQUIRED)
