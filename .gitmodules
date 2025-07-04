@@ -1,0 +1,6 @@
+[submodule "deps/LibRaw-cmake"]
+	path = deps/LibRaw-cmake
+	url = https://github.com/LibRaw/LibRaw-cmake.git
+[submodule "deps/LibRaw"]
+	path = deps/LibRaw
+	url = https://github.com/LibRaw/LibRaw.git
