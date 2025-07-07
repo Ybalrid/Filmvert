@@ -159,6 +159,79 @@ void mainWindow::paramView() {
                 }
             }
 
+            ImGui::Separator();
+
+            if (validIm())
+            {
+                ImGui::SetNextItemOpen(true, ImGuiCond_Once);
+                if (ImGui::TreeNode("Enlarger Filters")) {
+                    static float offset = 0.005f;
+                    ImGui::InputFloat("Offset percentage", &offset);
+
+                    ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0, 0, 0, 255));
+
+                    ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(255, 0, 0, 255));
+                    ImVec2 size(100, 100);
+                    if (ImGui::Button("C-", size))
+                    {
+                        activeImage()->imgParam.g_offset[0] += offset;
+                        paramChange = true;
+                    }
+                    ImGui::PopStyleColor();
+
+                    ImGui::SameLine();
+                    ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 255, 0, 255));
+                    if (ImGui::Button("M-", size))
+                    {
+                        activeImage()->imgParam.g_offset[1] += offset;
+                        paramChange = true;
+                    }
+                    ImGui::PopStyleColor();
+
+                    ImGui::SameLine();
+                    ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 255, 255));
+                    if (ImGui::Button("Y-", size))
+                    {
+                        activeImage()->imgParam.g_offset[2] += offset;
+                        paramChange = true;
+                    }
+                    ImGui::PopStyleColor();
+
+                    ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 255, 255, 255));
+                    if (ImGui::Button("C+", size))
+                    {
+                        activeImage()->imgParam.g_offset[0] -= offset;
+                        paramChange = true;
+                    }
+                    ImGui::PopStyleColor();
+                    ImGui::SameLine();
+
+                    ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(255, 0, 255, 255));
+                    if (ImGui::Button("M+", size))
+                    {
+                        activeImage()->imgParam.g_offset[1] -= offset;
+                        paramChange = true;
+                    }
+                    ImGui::PopStyleColor();
+                    ImGui::SameLine();
+
+                    ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(255, 255, 0, 255));
+                    if (ImGui::Button("Y+", size))
+                    {
+                        activeImage()->imgParam.g_offset[2] -= offset;
+                        paramChange = true;
+                    }
+                    ImGui::PopStyleColor();
+
+
+                    ImGui::PopStyleColor();
+
+                    ImGui::TreePop();
+                }
+            }
+
+
+
 
 
             /* GRADE PARAMS */
@@ -225,6 +298,10 @@ void mainWindow::paramView() {
             }
 
         } ImGui::EndChild();
+
+
+        //HACKHACK Yba
+
 
 
         //--- STATUS ---//
